@@ -1,5 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { AlurakutStyles} from '../src/lib/AlurakutCommons'
+import {AlurakutStyles} from '../lib/AlurakutCommons'
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -16,12 +16,12 @@ const GlobalStyle = createGlobalStyle`
 
   #__next {
     display: flex;
-    min-heigth: 100hv;
+    min-height: 100vh;
     flex-direction: column;
   }
   img {
     max-width: 100%;
-    heigth: auto;
+    height: auto;
     display: block;
   }
 
