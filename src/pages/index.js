@@ -3,6 +3,7 @@ import Box from '../components/Box'
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet} from '../lib/AlurakutCommons'
 import { ProfileRelationsBoxWrapper } from '../components/ProfileRelations';
 import React from 'react';
+
 function ProfileSidebar(props) {
   return(
     <Box as="aside" >
@@ -20,6 +21,27 @@ function ProfileSidebar(props) {
     </Box>
   )
 }
+function ProfileRelationsBox(props) {
+  return (
+    <ProfileRelationsBoxWrapper>
+      <h2 className="smallTitle">
+          {props.title} ({props.items.length})
+      </h2>
+    {/* <ul>
+      {seguidores.map((intemAtual) => {
+        return(
+          <li key={intemAtual}>
+            <a href={`htyps://github.com/${intemAtual.login}.png`}>
+              <img src={intemAtual.image} />
+              <span>{intemAtual.title}</span>
+            </a>
+          </li>
+        )
+      })}
+    </ul> */}
+  </ProfileRelationsBoxWrapper>
+  )
+}
 
 export default function Home() {
   const githubUser = 'devBernardo-Mendes';
@@ -35,8 +57,25 @@ export default function Home() {
   'devMatheus-Gomes',
   'devAndre-Isaac',
   'm-pedreiira',
-  'leonardomleitao'
-]
+  'leonardomleitao',
+  'rc-chuah',
+  'lucianesantcs'
+  ]
+
+  const [seguidores, setSeguidores] = React.useState ([]);
+  //Pegar p array dos dados do git
+
+  React.useEffect(function(){
+      fetch('https://api.github.com/users/devBernardo-Mendes/followers')
+      .then(function(respostaDoServidor) {  
+      return respostaDoServidor.json();
+    })
+      .then(function(respostaCompleta) {
+      setSeguidores(respostaCompleta);
+    })
+  }, [])
+  
+
   
   return (
     <>
@@ -93,6 +132,7 @@ export default function Home() {
           </Box>
         </div>
         <div className="profileRelationsAreas" style={{ gridArea: 'profileRelationsAreas' }}>
+          <ProfileRelationsBox title="Seguidores" items={seguidores} />
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
                 Comunidades ({comunidades.length})
